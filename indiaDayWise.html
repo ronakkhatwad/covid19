@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>COVID-19 LIVE UPDATES</title>
+    <style media="screen">
+    .fa {
+      color: #E90606;
+      margin: 0 3px;
+      font-size: 10px;
+      animation: pound 0.35s infinite alternate;
+      -webkit-animation: pound 0.35s infinite alternate;
+    }
+
+    @-webkit-keyframes pound {
+      to {
+        transform: scale(1.1);
+      }
+    }
+    @keyframes pound {
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    </style>
+  </head>
+  <body onload="fetch()" style="background-color: #e6ebfc;">
+    <nav class="navbar navbar-expand-lg navbar-dark align-right" style="background-color: #867ae9;">
+     <a class="navbar-brand" href="index.php">Covid-19</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="indiaCoronaLive.html">India Corona Live</a>
+         </li>
+
+         <li class="nav-item  active">
+           <a class="nav-link" href="indiaDayWise.html">India DayWise Live</a>
+         </li>
+       </ul>
+     </div>
+   </nav>
+<section class="container-fluid">
+  <div class="my-5">
+    <h3 class="text-center text-uppercase">COVID-19 LIVE UPDATES OF INDIA DAY WISE </h3>
+  </div>
+  <div class="table-responsive">
+  <table class="table table-borderless" id="tbval">
+ <tr>
+   <th></th>
+ </tr>
+  </table>
+
+</div>
+</section>
+<footer class="page-footer font-small" style="background-color: #867ae9;">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="color: #fff;">Made with <i class="fa fa-heart pulse"></i> by Ronak Khatwad
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+<script type="text/javascript">
+
+function fetch(){
+  jQuery.get("https://api.covid19india.org/data.json", function (data){
+     var arr = data['cases_time_series'];
+     arr.reverse();
+    var tbval = document.getElementById('tbval');
+    for(var i = 0;i<15;i++){
+      var x = tbval.insertRow();
+      x.insertCell(0);
+      tbval.rows[i+1].cells[0].innerHTML = '<div class="table-responsive"><p>Date : '+arr[i]["date"]+'<p><table class="table table-bordered table-striped text-center"><tr><th style="color:#fff;background:#2196f3">Total Confirmed</th><th style="color:#fff;background:#ffc107">Daily Confirmed</th><th style="color:#fff;background:#008C76FF">Daily Recovered</th><th style="color:#fff;background:#e91e7f">Daily Deceased</th><th style="color:#fff;background:#4caf50">Total Recovered</th><th style="color:#fff;background:#EE2737FF">Total Deceased</th></tr><tr><td style="background:#bed2f3">'+arr[i]["totalconfirmed"]+'</td><td style="background:#ffe493">'+arr[i]["dailyconfirmed"]+'</td><td style="background:#9ED9CCFF">'+arr[i]["dailyrecovered"]+'</td><td style="background:#fc95c6">'+arr[i]["dailydeceased"]+'</td> <td style="background:#88d28b">'+arr[i]["totalrecovered"] + '</td><td style="background:#fb99a1">'+arr[i]["totaldeceased"]+'</td></tr></table></div>';
+    }
+  });
+}
+</script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>
